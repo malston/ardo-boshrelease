@@ -1,0 +1,14 @@
+---
+name: web_ui
+
+templates:
+  ctl.erb: bin/ctl
+
+packages:
+- ardo_app
+- ruby_1.9.3
+
+properties:
+   web_ui.port:
+     description: Port that ardo_web app will listen on
+     default: 80

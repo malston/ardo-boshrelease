@@ -1,0 +1,5 @@
+check process ardo_dns
+  with pidfile /var/vcap/sys/run/ardo_dns/pid
+  start program "/var/vcap/jobs/ardo_dns/bin/ctl start"
+  stop program "/var/vcap/jobs/ardo_dns/bin/ctl stop"
+  group vcap
