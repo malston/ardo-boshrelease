@@ -1,6 +1,6 @@
 set -e -x
 
-cp -a argo_app/* ${BOSH_INSTALL_TARGET}
+cp -a ardo_app/* ${BOSH_INSTALL_TARGET}
 
 cd ${BOSH_INSTALL_TARGET}
 
