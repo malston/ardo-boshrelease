@@ -1,6 +1,15 @@
 # ardo-boshrelease
 Sample ardo bosh release created from [bosh.io](https://bosh.io/docs/create-release.html)
 
+In order to deploy this release, you'll need to create a bosh deployment manifest. An example is provided for bosh-lite.
+
+To understand this better, you'll want to read up on that [here](https://bosh.io/docs/deployment-manifest.html). You can dig deeper into IaaS specific deployments such as:
+ * [AWS CPI](https://bosh.io/docs/aws-cpi.html)
+ * [OpenStack](https://bosh.io/docs/openstack-cpi.html)
+ * [vSphere](https://bosh.io/docs/vsphere-cpi.html)
+ * [vCloud](https://bosh.io/docs/vcloud-cpi.html)
+
+
 ### Create a dev release
 ```
   $ bosh create release --force
