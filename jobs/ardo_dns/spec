@@ -1,5 +1,6 @@
 ---
 name: ardo_dns
+
 templates:
   ctl.erb: bin/ctl
 
