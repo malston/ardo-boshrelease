@@ -1,0 +1,48 @@
+---
+resources:
+- name: repo-master
+  type: git
+  source:
+    uri: https://github.com/malston/ardo-boshrelease.git
+
+- name: "dev-release"
+  type: s3
+  source:
+    bucket: {{release-bucket}}
+    regexp: "p-ardo-(.*).tgz"
+    access_key_id: {{release-access-key}}
+    secret_access_key: {{release-secret-key}}
+
+- name: "tile-dev-release"
+  type: s3
+  source:
+    bucket: {{release-bucket}}
+    regexp: "ardo-(.*).pivotal"
+    access_key_id: {{release-access-key}}
+    secret_access_key: {{release-secret-key}}
+
+jobs:
+- name: create-release
+  public: true
+  plan:
+  - get: ardo-repo
+  - task: create-release
+    file: ardo-boshrelease/ci/scripts/create-release/task.yml
+  - put: dev-release
+      params:
+        from: "repo/dev_releases/ardo/ardo-(.+).tgz"
+        to: "dev_releases/"
+
+- name: create-piv-tile
+  public: true
+  plan:
+  - get: "repo"
+    resource: "repo-master"
+  - get: "release"
+    resource: "dev-release"
+  - task: create-tile
+    file: ardo-boshrelease/ci/scripts/create-tile/task.yml
+  - put: tile-dev-release
+      params:
+        from: "p-ardo-(.+).pivotal"
+        to: "dev_releases/"
