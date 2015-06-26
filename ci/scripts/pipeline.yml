@@ -25,13 +25,14 @@ jobs:
 - name: create-release
   public: true
   plan:
-  - get: ardo-repo
+  - get: repo
+    resource: "repo-master"
   - task: create-release
-    file: ardo-boshrelease/ci/scripts/create-release/task.yml
+    file: repo/ci/scripts/create-release/task.yml
   - put: dev-release
-      params:
-        from: "repo/dev_releases/ardo/ardo-(.+).tgz"
-        to: "dev_releases/"
+    params:
+      from: "create-release/repo/dev_releases/ardo/ardo-(.+).tgz"
+      to: "dev_releases/"
 
 - name: create-piv-tile
   public: true
@@ -41,8 +42,8 @@ jobs:
   - get: "release"
     resource: "dev-release"
   - task: create-tile
-    file: ardo-boshrelease/ci/scripts/create-tile/task.yml
+    file: repo/ci/scripts/create-tile/task.yml
   - put: tile-dev-release
-      params:
-        from: "p-ardo-(.+).pivotal"
-        to: "dev_releases/"
+    params:
+      from: "p-ardo-(.+).pivotal"
+      to: "dev_releases/"
