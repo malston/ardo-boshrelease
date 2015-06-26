@@ -9,7 +9,7 @@ ls repo/
 
 echo Creating a bosh release
 cd repo
-bosh -n create release --name $RELEASE_NAME --version $RELEASE_VERSION --force
+bosh -n create release --name $RELEASE_NAME --version $RELEASE_VERSION --force --with-tarball
 ls -al ../repo/dev_releases/
 ls -al ../repo/dev_releases/ardo
 
