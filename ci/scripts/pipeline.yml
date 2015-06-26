@@ -9,7 +9,7 @@ resources:
   type: s3
   source:
     bucket: {{release-bucket}}
-    regexp: "p-ardo-(.*).tgz"
+    regexp: "ardo-dev-(.*).tgz"
     access_key_id: {{release-access-key}}
     secret_access_key: {{release-secret-key}}
 
@@ -17,7 +17,7 @@ resources:
   type: s3
   source:
     bucket: {{release-bucket}}
-    regexp: "ardo-(.*).pivotal"
+    regexp: "p-ardo-dev-(.*).pivotal"
     access_key_id: {{release-access-key}}
     secret_access_key: {{release-secret-key}}
 
@@ -25,14 +25,14 @@ jobs:
 - name: create-release
   public: true
   plan:
-  - get: "repo"
+  - get: repo
     resource: "repo-master"
   - task: create-release
-    file: ardo-boshrelease/ci/scripts/create-release/task.yml
+    file: repo/ci/scripts/create-release/task.yml
   - put: dev-release
     params:
-      from: "repo/dev_releases/ardo/ardo-(.+).tgz"
-      to: "dev_releases/"
+      from: "create-release/repo/dev_releases/ardo-dev/ardo-dev(.+).tgz"
+#      to: "dev_releases/"
 
 - name: create-piv-tile
   public: true
@@ -41,9 +41,12 @@ jobs:
     resource: "repo-master"
   - get: "release"
     resource: "dev-release"
+#    params:
+#      from: "dev_releases/ardo-(.+).tgz"
   - task: create-tile
-    file: ardo-boshrelease/ci/scripts/create-tile/task.yml
+    privileged: true    # Need to run apt-get install zip...
+    file: repo/ci/scripts/create-tile/task.yml
   - put: tile-dev-release
     params:
-      from: "p-ardo-(.+).pivotal"
-      to: "dev_releases/"
+      from: "p-ardo-dev-(.+).pivotal"
+#      to: "dev_releases/"

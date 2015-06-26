@@ -2,8 +2,8 @@ repo-master-uri: "https://github.com/malston/ardo-boshrelease.git"
 repo-master-branch: "master"
 
 release-bucket: "pivotal-ardo-boshrelease"
-release-access-key: ~
-release-secret-key: ~
+release-access-key: ~ #{{aws-access-key}}
+release-secret-key: ~ #{{aws-secret-key}}
 
 #test-director-target: "https://192.168.50.4:25555"
 #test-director-username: "admin"
