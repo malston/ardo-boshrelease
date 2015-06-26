@@ -6,10 +6,10 @@ sudo apt-get install zip
 
 export RELEASE_NAME=${RELEASE_NAME:-ardo-dev}
 export RELEASE_VERSION=${RELEASE_VERSION:-0.1}
-export RELEASE_FILE=${RELEASE_NAME}_${RELEASE_VERSION}.tgz
+export RELEASE_FILE=${RELEASE_NAME}-${RELEASE_VERSION}.tgz
 
 export TILE_RELEASE_NAME=p-${TILE_RELEASE_NAME:-$RELEASE_NAME}
-export TILE_RELEASE_VERSION=${TILE_RELEASE_NAME}_${PRODUCT_VERSION}
+export TILE_RELEASE_VERSION=${TILE_RELEASE_NAME}-${PRODUCT_VERSION}
 
 echo Creating a pivnet tile
 mkdir -p /tmp/tile-results/metadata /tmp/tile-results/releases
