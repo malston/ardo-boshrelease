@@ -9,7 +9,7 @@ resources:
   type: s3
   source:
     bucket: {{release-bucket}}
-    regexp: "p-ardo-(.*).tgz"
+    regexp: "ardo-(.*).tgz"
     access_key_id: {{release-access-key}}
     secret_access_key: {{release-secret-key}}
 
@@ -17,7 +17,7 @@ resources:
   type: s3
   source:
     bucket: {{release-bucket}}
-    regexp: "ardo-(.*).pivotal"
+    regexp: "p-ardo-(.*).pivotal"
     access_key_id: {{release-access-key}}
     secret_access_key: {{release-secret-key}}
 
@@ -32,7 +32,7 @@ jobs:
   - put: dev-release
     params:
       from: "create-release/repo/dev_releases/ardo/ardo-(.+).tgz"
-      to: "dev_releases/"
+#      to: "dev_releases/"
 
 - name: create-piv-tile
   public: true
@@ -41,9 +41,11 @@ jobs:
     resource: "repo-master"
   - get: "release"
     resource: "dev-release"
+#    params:
+#      from: "dev_releases/ardo-(.+).tgz"
   - task: create-tile
     file: repo/ci/scripts/create-tile/task.yml
   - put: tile-dev-release
     params:
       from: "p-ardo-(.+).pivotal"
-      to: "dev_releases/"
+#      to: "dev_releases/"
