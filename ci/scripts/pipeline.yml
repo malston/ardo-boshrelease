@@ -44,6 +44,7 @@ jobs:
 #    params:
 #      from: "dev_releases/ardo-(.+).tgz"
   - task: create-tile
+    privileged: true    # Need to run apt-get install zip...
     file: repo/ci/scripts/create-tile/task.yml
   - put: tile-dev-release
     params:

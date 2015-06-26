@@ -2,7 +2,7 @@ echo $PWD
 
 TASK_ROOT_DIR=$PWD
 
-sudo apt-get install zip
+apt-get install zip
 
 export RELEASE_NAME=${RELEASE_NAME:-ardo-dev}
 export RELEASE_VERSION=${RELEASE_VERSION:-0.1}
